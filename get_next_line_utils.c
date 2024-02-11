@@ -30,9 +30,23 @@ char *ft_strchr(const char *s, int c)
     return (NULL);
 }
 
-char *ft_strdup(const char *s1)
+char *ft_strdup(const char *s)
 {
+    int i;
+    char    *new;
 
+    i = 0;
+    new = ((char *)malloc((sizeof(char) * ft_strlen(s)) + 1));
+    if (!new)
+    {
+        return (NULL);
+    }
+    while (*s)
+    {
+        new[i++] = *s++;
+    }
+    new[i] = '\0';
+    retun (new);
 }
 
 
