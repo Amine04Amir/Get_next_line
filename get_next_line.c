@@ -2,6 +2,10 @@
 
 #define BUFFER_SIZE 256
 
+// char *next_line()
+// {
+
+// }
 char	*ft_strjoin(char const *s1, char const *s2)
 {
     int i;
@@ -33,15 +37,19 @@ char    *get_next_line(int fd)
 {
     int bytes_read;
     char *buffer;
+    static int count = 1;
 
+    printf("malloc[%d]----", count++);
     buffer = malloc(sizeof(char) * 3+1);
     if (!buffer)
         return (NULL);
     bytes_read = read(fd, buffer, 3);
     if (bytes_read <= 0)
+    {
+        free (buffer);
         return (NULL);
+    }
     return (buffer);
-
 }
 int main()
 {
@@ -56,7 +64,6 @@ int main()
         next_line = get_next_line(fd);
         if (next_line == NULL)
             break;
-        count++;
         printf("[%d]:%s\n", count, next_line);
         free(next_line);
         next_line = NULL;
