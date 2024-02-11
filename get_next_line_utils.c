@@ -49,5 +49,20 @@ char *ft_strdup(const char *s)
     retun (new);
 }
 
+size_t ft_strlen2(const char *s)
+{
+    size_t i;
 
+    i = 0;
+    while (s[i] != '\n')
+    {
+        i++;
+    }
+    return (i);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+
+}
 
