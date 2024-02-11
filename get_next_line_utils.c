@@ -46,7 +46,7 @@ char *ft_strdup(const char *s)
         new[i++] = *s++;
     }
     new[i] = '\0';
-    retun (new);
+    return (new);
 }
 
 size_t ft_strlen2(const char *s)
@@ -63,6 +63,28 @@ size_t ft_strlen2(const char *s)
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
+    int i;
+    char *substr;
 
+    i = 0;
+    if (!s)
+        return (NULL);
+    if (len > ft_strlen(s) - start)
+        len = ft_strlen(s) - start;
+    if (ft_strlen(s) <= start)
+        return (ft_strdup(""));
+    substr = (char *)malloc((len + 1) * sizeof(char));
+    if (!substr)
+        return (NULL);
+    while(s[start] != '\0' && len > 0)
+    {
+        substr[i] = s[start];
+        i++;
+        len--;
+        start++;
+    }
+    substr[i] = '\0';
+    return  (substr);
 }
+
 
