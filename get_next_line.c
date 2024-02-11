@@ -12,6 +12,21 @@
 
 #include "get_next_line.h"
 
+void	join_string(char *res, char *s1, char *s2)
+{
+	unsigned int	i;
+	unsigned int	j;
+
+	i = 0;
+	j = 0;
+	while (s1[j])
+		res[i++] = s1[j++];
+	j = 0;
+	while (s2[j])
+		res[i++] = s2[j++];
+	res[i] = '\0';
+}
+
 char	*ft_readfile(int fd, char *string, char *buffer)
 {
 	char	*tmp;
