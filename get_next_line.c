@@ -27,6 +27,26 @@ void	join_string(char *res, char *s1, char *s2)
 	res[i] = '\0';
 }
 
+char	*ft_freeline(char *string)
+{
+	char	*line;
+	int		i;
+
+	i = 0;
+	while (string[i] && string[i] != '\n')
+		i++;
+	if (string[i] == '\0' || string[1] == '\0')
+		return (NULL);
+	line = ft_substr(string, i + 1, ft_strlen(string) - i);
+	if (*line == 0)
+	{
+		free(line);
+		line = NULL;
+	}
+	string[i + 1] = '\0';
+	return (line);
+}
+
 char	*ft_readfile(int fd, char *string, char *buffer)
 {
 	char	*tmp;
@@ -56,26 +76,6 @@ char	*ft_readfile(int fd, char *string, char *buffer)
 	return (string);
 }
 
-char	*ft_freeline(char *string)
-{
-	char	*line;
-	int		i;
-
-	i = 0;
-	while (string[i] && string[i] != '\n')
-		i++;
-	if (string[i] == '\0' || string[1] == '\0')
-		return (NULL);
-	line = ft_substr(string, i + 1, ft_strlen(string) - i);
-	if (*line == 0)
-	{
-		free(line);
-		line = NULL;
-	}
-	string[i + 1] = '\0';
-	return (line);
-}
-
 char	*get_next_line(int fd)
 {
 	char		*line;
@@ -101,8 +101,7 @@ char	*get_next_line(int fd)
 	string = ft_freeline(line);
 	return (line);
 }
-/*
-int	main(void)
+/*int	main(void)
 {
 	int fd;
 	int count = 0;

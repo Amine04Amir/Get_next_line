@@ -1,6 +1,0 @@
-…As the aquarium’s water level decreased,
- the basin needed constant expansion to store more water.
-Enlarging the basin while holding the water without spilling it presented a challenge….
-
-This chapter focuses on the basin.
- Its needs and behaviour throughout get_next_line function and between its calls from main.c
