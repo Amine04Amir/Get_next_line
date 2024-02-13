@@ -95,14 +95,14 @@ char	*ft_read(int fd, char *line)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*str;
+	static char	*statik;
 
 	if (fd < 0 || (size_t)BUFFER_SIZE < 1)
 		return (NULL);
-	str = ft_read(fd, str);
-	if (!str)
+	statik = ft_read(fd, statik);
+	if (!statik)
 		return (NULL);
-	line = ft_read_line(str);
-	str = ft_rest(str);
+	line = ft_read_line(statik);
+	statik = ft_rest(statik);
 	return (line);
 }
