@@ -12,17 +12,49 @@
 
 #include "get_next_line.h"
 
-char *ft_read_line(char *str)
+char	*ft_rest(char *str)
 {
-	int	i;
+	int		i;
+	int		j;
 	char	*line;
 
 	i = 0;
+	j = 0;
+	if (!str)
+		return (NULL);
+	while (str[i] != '\n' && str[i])
+		i++;
+	if (str[i] == '\0')
+	{
+		free(str);
+		return (NULL);
+	}
+	line = malloc(ft_strlen(str) - i + 1);
+	if (!line)
+		return (NULL);
+	i++;
+	while (str[i])
+		line[j++] = str[i++];
+	line[j] = '\0';
+	free(str);
+	return (line);
+}
+
+char	*ft_read_line(char *str)
+{
+	int		i;
+	char	*line;
+
+	i = 0;
+	if (!str[i])
+		return (NULL);
 	while (str[i] != '\n' && str[i] != '\0')
 		i++;
 	if (str[i] == '\n')
 		i++;
 	line = (char *)malloc(i + 1);
+	if (!line)
+		return (NULL);
 	i = 0;
 	while (str[i] != '\n' && str[i] != '\0')
 	{
@@ -30,55 +62,47 @@ char *ft_read_line(char *str)
 		i++;
 	}
 	if (str[i] == '\n')
-		line[i] = '\n';
+		line[i++] = '\n';
 	line[i] = '\0';
 	return (line);
 }
 
-char *ft_read(int fd, char *s)
+char	*ft_read(int fd, char *line)
 {
-	char *buffer;
-	ssize_t	bytes_read;
-
+	char	*buffer;
+	int		bytes_read;
 
 	bytes_read = 1;
-	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	buffer = malloc((size_t)BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
-	while (bytes_read > 0)
+	while (bytes_read != 0 && !ft_strchr(line, '\n'))
 	{
-	 	bytes_read = read(fd, buffer, BUFFER_SIZE);
-		if (bytes_read == -1)
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read < 0)
 		{
 			free(buffer);
+			free(line);
 			return (NULL);
 		}
-		// if (bytes_read == 0)
-		// 	break ;
 		buffer[bytes_read] = '\0';
-		s = ft_strjoin(s, buffer);
-		if (ft_strchr(buffer, '\n')) 
-			break ;
+		line = ft_strjoin(line, buffer);
 	}
 	free(buffer);
-	return (s);
+	return (line);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	char *s;
-	static char *str;
+	char		*line;
+	static char	*str;
 
-	if (fd < 0 || BUFFER_SIZE < 0)
-		return NULL;
-	str = ft_read(fd, s);
-	str = ft_readline(str);
-	// printf("str = %s\n", str);
-	return (str);
-}
-
-int main ()
-{
-    int fd = open("test.txt", O_RDONLY);
-	printf("%s\n", get_next_line(fd));
+	if (fd < 0 || (size_t)BUFFER_SIZE < 1)
+		return (NULL);
+	str = ft_read(fd, str);
+	if (!str)
+		return (NULL);
+	line = ft_read_line(str);
+	str = ft_rest(str);
+	return (line);
 }
