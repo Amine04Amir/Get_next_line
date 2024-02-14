@@ -55,6 +55,7 @@ char	*ft_line(char *statik)
 	line = (char *)malloc(i + 1);
 	if (!line)
 		return (NULL);
+	return (NULL);
 	i = 0;
 	while (statik[i] != '\n' && statik[i] != '\0')
 	{
@@ -97,7 +98,7 @@ char	*get_next_line(int fd)
 	char		*line;
 	static char	*statik;
 
-	if (fd < 0 || (size_t)BUFFER_SIZE < 1)
+	if (fd < 0 || BUFFER_SIZE < 0 || (size_t)BUFFER_SIZE > INT_MAX)
 		return (NULL);
 	statik = ft_read(fd, statik);
 	if (!statik)
