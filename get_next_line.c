@@ -106,17 +106,3 @@ char	*get_next_line(int fd)
 	statik = ft_rest(statik);
 	return (line);
 }
-
-int main()
-{
-	// int fd = open("zbi", O_RDONLY);
-	while(1)
-	{
-	char *s = get_next_line(0);
-	printf("%s\n", s);
-	free(s);
-	}
-	// system("leaks a.out");
-
-
-}
