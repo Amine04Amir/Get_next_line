@@ -40,7 +40,7 @@ char	*ft_rest(char *statik)
 	return (rest);
 }
 
-char	*ft_read_line(char *statik)
+char	*ft_line(char *statik)
 {
 	int		i;
 	char	*line;
@@ -102,7 +102,7 @@ char	*get_next_line(int fd)
 	statik = ft_read(fd, statik);
 	if (!statik)
 		return (NULL);
-	line = ft_read_line(statik);
+	line = ft_line(statik);
 	statik = ft_rest(statik);
 	return (line);
 }
