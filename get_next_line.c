@@ -52,10 +52,9 @@ char	*ft_line(char *statik)
 		i++;
 	if (statik[i] == '\n')
 		i++;
-	line = (char *)malloc(i + 1);
+	line = malloc(i + 1);
 	if (!line)
 		return (NULL);
-	return (NULL);
 	i = 0;
 	while (statik[i] != '\n' && statik[i] != '\0')
 	{
@@ -74,7 +73,7 @@ char	*ft_read(int fd, char *statik)
 	int		bytes_read;
 
 	bytes_read = 1;
-	buffer = malloc((size_t)BUFFER_SIZE + 1);
+	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
 	while (bytes_read != 0 && !ft_strchr(statik, '\n'))
@@ -98,7 +97,7 @@ char	*get_next_line(int fd)
 	char		*line;
 	static char	*statik;
 
-	if (fd < 0 || BUFFER_SIZE < 0 || (size_t)BUFFER_SIZE > INT_MAX)
+	if (fd < 0 || BUFFER_SIZE < 0 || BUFFER_SIZE > INT_MAX)
 		return (NULL);
 	statik = ft_read(fd, statik);
 	if (!statik)

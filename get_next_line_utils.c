@@ -44,7 +44,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	char	*str;
 
 	i = -1;
-	j = -1;
+	j = 0;
 	if (!s1)
 	{
 		s1 = malloc(1);
