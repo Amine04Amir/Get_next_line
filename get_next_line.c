@@ -16,7 +16,7 @@ char	*ft_rest(char *statik)
 {
 	int		i;
 	int		j;
-	char	*line;
+	char	*rest;
 
 	i = 0;
 	j = 0;
@@ -29,15 +29,15 @@ char	*ft_rest(char *statik)
 		free(statik);
 		return (NULL);
 	}
-	line = malloc(ft_strlen(statik) - i + 1);
-	if (!line)
+	rest = malloc(ft_strlen(statik) - i + 1);
+	if (!rest)
 		return (NULL);
 	i++;
 	while (statik[i])
-		line[j++] = statik[i++];
-	line[j] = '\0';
+		rest[j++] = statik[i++];
+	rest[j] = '\0';
 	free(statik);
-	return (line);
+	return (rest);
 }
 
 char	*ft_read_line(char *statik)
