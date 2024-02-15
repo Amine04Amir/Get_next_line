@@ -22,7 +22,7 @@ char	*ft_rest(char *statik)
 	j = 0;
 	if (!statik)
 		return (NULL);
-	while (statik[i] != '\n' && statik[i])
+	while (statik[i] != '\n' && statik[i] != '\0')
 		i++;
 	if (statik[i] == '\0')
 	{
