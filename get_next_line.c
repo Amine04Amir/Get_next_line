@@ -73,7 +73,7 @@ char	*ft_read(int fd, char *statik)
 	int		bytes_read;
 
 	bytes_read = 1;
-	buffer = malloc(BUFFER_SIZE + 1);
+	buffer = malloc((size_t)BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
 	while (bytes_read != 0 && !ft_strchr(statik, '\n'))
@@ -97,7 +97,7 @@ char	*get_next_line(int fd)
 	char		*line;
 	static char	*statik;
 
-	if (fd < 0 || BUFFER_SIZE < 0 || BUFFER_SIZE > INT_MAX)
+	if (fd < 0 || BUFFER_SIZE < 0)
 		return (NULL);
 	statik = ft_read(fd, statik);
 	if (!statik)
