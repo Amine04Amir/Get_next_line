@@ -97,7 +97,7 @@ char	*get_next_line(int fd)
 	char		*line;
 	static char	*statik[1024];
 
-	if (fd < 0 || BUFFER_SIZE < 0 || BUFFER_SIZE > INT_MAX)
+	if (fd < 0 || BUFFER_SIZE < 0)
 		return (NULL);
 	statik[fd] = ft_read(fd, statik[fd]);
 	if (!statik[fd])
